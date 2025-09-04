@@ -575,9 +575,13 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
 
                 const bench = allPlayers.filter(pId => pId && !starterIds.includes(pId) && !(roster.taxi || []).includes(pId));
                 const draftPicks = getOwnedPicks(roster.roster_id, tradedPicks, leagueInfo);
-                
+               
+               
+               const isUserTeam = roster.owner_id === state.userId || 
+               (roster.co_owners?.includes(state.userId) ?? false);
+
                 return {
-                    isUserTeam: roster.owner_id === state.userId,
+                    isUserTeam,
                     teamName: owner?.display_name || `Team ${roster.roster_id}`,
                     starters,
                     bench: bench.map(p => getPlayerData(p, 'BN')).sort((a, b) => (b.ktc || 0) - (a.ktc || 0)),
@@ -903,8 +907,13 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
             tradeSimulator.innerHTML = `
             <div class="trade-container glass-panel">
               <div class="trade-header">
-                <div class="trade-header-left"><h3>Trade Preview</h3></div>
-                <div class="trade-header-center"><button id="collapseTradeButton">Hide &#9662;</button></div>
+                <div class="trade-header-left"><h3>Trade Preview ⇄</h3></div>
+                <div class="trade-header-center">
+                  <button id="collapseTradeButton">
+                    <span class="label">Hide</span>
+                    <span class="material-symbols-outlined" aria-hidden="true">arrow_drop_down_circle</span>
+                  </button>
+                </div>
                 <div class="trade-header-right"><button id="clearTradeButton">Clear</button></div>
               </div>
               <div class="trade-body"></div>
@@ -954,10 +963,15 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
                 }
                 
                 const totalClass = totalClasses[teamName] || 'even';
-
+              
+                let teamNameDisplay = teamName;
+                if (teamNames.length === 2) {
+                    if (index === 0) teamNameDisplay = `${teamName} ⥂`;
+                    if (index === 1) teamNameDisplay = `⥄ ${teamName}`;
+                }
                 bodyHtml += `
                     <div class="trade-team-column">
-                        <h4>${teamName}</h4>
+                       <h4>${teamNameDisplay}</h4>
                         <div class="trade-assets">${assetsHTML}</div>
                         <div class="trade-total ${totalClass}">
                             Total KTC: ${totalKtc}

@@ -55,6 +55,15 @@
         overflow-x: hidden;
         position: relative;
       }
+      
+        button:focus,
+        input:focus,
+        select:focus,
+        textarea:focus,
+        a:focus {
+          outline: 1px solid rgba(255, 255, 255, 0.2); /* faint light ring */
+          outline-offset: 2px;                         /* optional spacing */
+        }
 
       .content-wrapper {
         display: flex;
@@ -1009,7 +1018,7 @@
             color: var(--color-text-primary);
             padding: 0.50rem 0.75rem;
             border-radius: var(--panel-border-radius);
-            font-size: 0.8rem;
+            font-size: 1rem;
             width: 100%;
             margin: 0.5rem auto;
             display: block;
@@ -2121,3 +2130,25 @@ font-weight: 500 !important;
             box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
+/* Base: Outlined symbols, not filled, weight 400, optical size 24 */
+/* Material Symbols base — required so ligatures map to icons */
+.material-symbols-outlined{
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal; line-height: 1;
+  letter-spacing: normal; text-transform: none;
+  display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr;
+  -webkit-font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; /* defaults */
+}
+
+/* Helpers so you can tweak quickly */
+.ms-fill-1 { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }  /* filled */
+.ms-wght-500 { font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24; } /* bolder */
+.ms-opsz-20 { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20; }  /* smaller optical size */
+
+/* Size & color: treat the icon like text */
+#collapseTradeButton .material-symbols-outlined {
+  font-size: 1.125rem;  /* <= change size here (e.g., 16px = 1rem, 20px ≈ 1.25rem) */
+  color: #64748b;       /* <= your desired color; or inherit from the button */
+  margin-left: 0.35rem; /* a little gap after "Hide" */
+}
