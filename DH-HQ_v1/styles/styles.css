@@ -552,7 +552,7 @@
             justify-content: center;
         }
         .roster-column {
-    width: 135px;
+    width: 120px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;

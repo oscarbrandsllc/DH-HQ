@@ -862,7 +862,7 @@ function showLegend(){ try{ document.getElementById('legend-section')?.classList
                 <div class="player-meta-line">
                     <span class="player-pos-rank" style="color: ${posRankColor}; font-weight: 400;">${player.posRank || player.pos}</span>
                     <span class="separator">•</span>
-                    <span>Age: <span class="player-age">${player.age || '?'}</span></span>
+                    <span><span class="player-age">${player.age || '?'}</span> yo</span>
                     <span class="separator">•</span>
                     ${teamTagHTML}
                 </div>
